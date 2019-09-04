@@ -23,6 +23,16 @@ public class UIController : MonoBehaviour
         popup.Refresh();
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            bool isShowing = popup.gameObject.activeSelf;
+            popup.gameObject.SetActive(!isShowing);
+            popup.Refresh();
+        }
+    }
+
     private void OnHealthUpdate(){
         string message = "Health: " + Manager.Player.health + "/" +
         Manager.Player.maxHealth;

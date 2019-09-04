@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 [RequireComponent(typeof(CharacterController))]
 
 public class PointClickMovement : MonoBehaviour
@@ -43,7 +45,7 @@ public class PointClickMovement : MonoBehaviour
         // start with zero and add movement components progressively
         Vector3 movement = Vector3.zero;
 
-        if (Input.GetMouseButton(0)) // tet mission point by click
+        if (Input.GetMouseButton(0) && !EventSystem.current.IsPointerOverGameObject()) // tet mission point by click
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit mouseHit;
