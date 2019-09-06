@@ -21,7 +21,7 @@ public class InventoryPopup : MonoBehaviour
 
         int itemLen = itemIcons.Length;
 
-        for(int i = 0; i<=itemLen; i++)
+        for(int i = 0; i< itemLen; i++)
         {
             if (i < itemList.Count)
             {
