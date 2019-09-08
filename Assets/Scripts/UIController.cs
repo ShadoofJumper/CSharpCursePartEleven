@@ -7,19 +7,25 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private Text healthLevel;
     [SerializeField] private InventoryPopup popup;
+    [SerializeField] private Text levelEnding;
 
     void Awake(){
         Messenger.AddListener(GameEvent.HEALTH_UPDATE, OnHealthUpdate);
+        Messenger.AddListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
+
     }
 
     void OnDestroy(){
         Messenger.RemoveListener(GameEvent.HEALTH_UPDATE, OnHealthUpdate);
+        Messenger.RemoveListener(GameEvent.LEVEL_COMPLETE, OnLevelComplete);
+
     }
 
     void Start(){
         OnHealthUpdate(); // on start call function
         bool IsShowing = popup.gameObject.activeSelf;
-        popup.gameObject.SetActive(!IsShowing);
+        levelEnding.gameObject.SetActive(false);
+        popup.gameObject.SetActive(false);
         popup.Refresh();
     }
 
@@ -34,8 +40,24 @@ public class UIController : MonoBehaviour
     }
 
     private void OnHealthUpdate(){
-        string message = "Health: " + Manager.Player.health + "/" +
-        Manager.Player.maxHealth;
+
+        string message = "Health: " + Manager.Player.health + "/" + Manager.Player.maxHealth;
         healthLevel.text = message;
+    }
+
+    private void OnLevelComplete()
+    {
+        StartCoroutine(CompleteLevel());
+    }
+
+    private IEnumerator CompleteLevel()
+    {
+        levelEnding.gameObject.SetActive(true);
+        levelEnding.text = "Level Complete";
+
+        yield return new WaitForSeconds(2);
+
+        Manager.Mission.GoToNext();
+
     }
 }
