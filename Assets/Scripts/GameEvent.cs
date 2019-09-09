@@ -6,5 +6,6 @@ public class GameEvent : MonoBehaviour
 {
     public const string HEALTH_UPDATE = "HEALTH_UPDATE";
     public const string LEVEL_COMPLETE = "LEVEL_COMPLETE";
+    public const string LEVEL_FAILED = "LEVEL_FAILED";
 
 }

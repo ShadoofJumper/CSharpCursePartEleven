@@ -47,4 +47,11 @@ public class MissionManager : MonoBehaviour, IGameManager
         // here can be code for work with several objectives
         Messenger.Broadcast(GameEvent.LEVEL_COMPLETE);
     }
+
+    public void RestartCurent()
+    {
+        string name = "Level" + curLevel;
+        Debug.Log("Loading " + name);
+        Application.LoadLevel(name);
+    }
 }

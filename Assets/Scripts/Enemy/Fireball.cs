@@ -5,7 +5,7 @@ using UnityEngine;
 public class Fireball : MonoBehaviour
 {
     public float speed = 10.0f;
-    public float damage = 1;
+    public int damage = 1;
     // Update is called once per frame
     void Update()
     {
@@ -17,7 +17,7 @@ public class Fireball : MonoBehaviour
         PlayerCharacter player = other.GetComponent<PlayerCharacter>();
         if (player != null)
         {
-            player.Heart(1);
+            player.Heart(damage);
         }
         Destroy(this.gameObject);
     }

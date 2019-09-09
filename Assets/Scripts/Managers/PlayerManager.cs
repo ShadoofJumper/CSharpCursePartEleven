@@ -12,14 +12,20 @@ public class PlayerManager : MonoBehaviour, IGameManager
 
     public void Startup(NetworkService service)
     {
-        Debug.Log("PlayerManager manaher starting ...");
+        Debug.Log("Player manager starting ...");
 
         _network = service;
 
-        health = 50;
-        maxHealth = 50;
+        UpdateData(50, 100);
 
         status = ManagerStatus.Started;
+    }
+
+    public void UpdateData(int health, int maxHealth)
+    {
+        Debug.Log("UpdateData");
+        this.health = health;
+        this.maxHealth = maxHealth;
     }
 
     public void ChangeHealth(int value)
@@ -34,7 +40,17 @@ public class PlayerManager : MonoBehaviour, IGameManager
             health = 0;
         }
 
-        Debug.Log("Health: " + health + "/" + maxHealth);
+        if (health == 0)
+        {
+            Messenger.Broadcast(GameEvent.LEVEL_FAILED); // send to program info dat we change health
+
+        }
+
         Messenger.Broadcast(GameEvent.HEALTH_UPDATE); // send to program info dat we change health
+    }
+
+    public void Respawn()
+    {
+        UpdateData(50, 100);
     }
 }
