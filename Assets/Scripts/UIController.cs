@@ -77,4 +77,13 @@ public class UIController : MonoBehaviour
 
     }
 
+    public void SaveGame()
+    {
+        Manager.Data.SaveGameState();
+    }
+
+    public void LoadGame()
+    {
+        Manager.Data.LoadGameState();
+    }
 }

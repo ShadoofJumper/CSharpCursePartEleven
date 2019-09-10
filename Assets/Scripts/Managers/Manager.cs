@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 [RequireComponent(typeof(PlayerManager))]
 [RequireComponent(typeof(InventoryManager))]
+[RequireComponent(typeof(DataManager))]
 
 
 public class Manager : MonoBehaviour
@@ -10,6 +11,7 @@ public class Manager : MonoBehaviour
     public static PlayerManager Player { get; private set; }
     public static InventoryManager Inventory { get; private set; }
     public static MissionManager Mission { get; private set; }
+    public static DataManager Data { get; private set; }
 
     private List<IGameManager> _startSequence; // all manager (dispatcher) 
 
@@ -20,11 +22,14 @@ public class Manager : MonoBehaviour
         Player = GetComponent<PlayerManager>();
         Inventory = GetComponent<InventoryManager>();
         Mission = GetComponent<MissionManager>();
+        Data = GetComponent<DataManager>();
+
 
         _startSequence = new List<IGameManager>();
         _startSequence.Add(Player);
         _startSequence.Add(Inventory);
         _startSequence.Add(Mission);
+        _startSequence.Add(Data);
 
         StartCoroutine(StartupManager());
     }
