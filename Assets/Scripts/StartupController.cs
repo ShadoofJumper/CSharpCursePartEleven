@@ -19,7 +19,6 @@ public class StartupController : MonoBehaviour
         Messenger.RemoveListener(StartupEvent.MANAGERS_STARTED, OnManagerStarted);
 
     }
-
     private void OnManagerProgress(int numReady, int numModules)
     {
         float progress = (float)numReady / numModules;
